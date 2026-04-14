@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\socialAuthController;
@@ -46,7 +47,8 @@ Route::post('/cart/check', [CartController::class, 'check']);
 Route::get('/login-google', [socialAuthController::class, 'redirectToProvider']);
 Route::get('/auth/google/callback', [socialAuthController::class, 'handleCallback']);
 
-
+Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession']);
+Route::post('/stripe-webhook', [PaymentController::class, 'handleWebhook']);
 
 // Protected Routes
 Route::middleware('auth:api')->group(function () {
@@ -84,6 +86,10 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/cart', [CartController::class, 'store']);
     Route::get('/cart', [CartController::class, 'index']);
+
+
+    // Checkout
+
 
 
     // Auth
