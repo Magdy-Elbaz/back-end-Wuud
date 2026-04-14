@@ -22,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Passport::ignoreCryptoKeys();
 
         Passport::refreshTokensExpireIn(now()->addMonth(6));
         Passport::personalAccessTokensExpireIn(now()->addMonth(6));
