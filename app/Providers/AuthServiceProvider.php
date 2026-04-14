@@ -23,9 +23,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+        \Laravel\Passport\Passport::ignoreCryptoKeys();
 
-        Passport::refreshTokensExpireIn(now()->addMonth(6));
-        Passport::personalAccessTokensExpireIn(now()->addMonth(6));
+        \Laravel\Passport\Passport::refreshTokensExpireIn(now()->addMonth(6));
+        \Laravel\Passport\Passport::personalAccessTokensExpireIn(now()->addMonth(6));
     }
 
 
